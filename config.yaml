@@ -1,0 +1,14 @@
+nodes:
+  - id: node1
+    address: localhost:50051
+  - id: node2
+    address: localhost:50052
+  - id: node3
+    address: localhost:50053
+
+chunk_size: 1048576
+heartbeat_interval: 5
+heartbeat_timeout: 3
+leader_address: localhost:6000
+supernode_address: localhost:7000
+replication_factor: 2

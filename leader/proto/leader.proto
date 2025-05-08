@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package leader;
+
+service LeaderService {
+  // Upload file bằng streaming từ client
+  rpc UploadFile (stream UploadFileRequest) returns (UploadFileResponse);
+
+  // Download file cũng bằng streaming về client
+  rpc DownloadFile (DownloadFileRequest) returns (stream DownloadFileResponse);
+}
+
+// Message upload
+message UploadFileRequest {
+  string file_name = 1;    // tên file, gửi kèm trong request đầu tiên
+  bytes chunk_data = 2;    // data từng phần của file
+}
+
+message UploadFileResponse {
+  string status = 1;       // Trả về "Upload Successful" nếu ok
+}
+
+// Message download
+message DownloadFileRequest {
+  string file_name = 1;    // yêu cầu download file theo tên
+}
+
+message DownloadFileResponse {
+  bytes chunk_data = 1;    // data chunk được gửi về
+  bool file_end = 2;       // true nếu kết thúc file
+}

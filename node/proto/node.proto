@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package node;
+
+service NodeService {
+  rpc StoreChunk (StoreChunkRequest) returns (StoreChunkResponse);
+  rpc RetrieveChunk (RetrieveChunkRequest) returns (RetrieveChunkResponse);
+  rpc DeleteChunk (DeleteChunkRequest) returns (DeleteChunkResponse);
+  rpc Ping (PingRequest) returns (PingResponse);
+}
+
+message StoreChunkRequest {
+  string chunk_id = 1;
+  bytes chunk_data = 2;
+}
+
+message StoreChunkResponse {
+  string status = 1;
+}
+
+message RetrieveChunkRequest {
+  string chunk_id = 1;
+}
+
+message RetrieveChunkResponse {
+  bytes chunk_data = 1;
+  bool found = 2;
+}
+
+message DeleteChunkRequest {
+  string chunk_id = 1;
+}
+
+message DeleteChunkResponse {
+  string status = 1;
+}
+
+message PingRequest {}
+
+message PingResponse {
+  string message = 1; // e.g., "Alive"
+}
